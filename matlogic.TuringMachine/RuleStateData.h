@@ -11,8 +11,8 @@ class Rule;  // { func: direction, next_state, cur_state, change_of_ }
 using State = int; // q* == -1
 
 
-enum class Direction : char16_t {
-	Left, Right, inPlace
+enum class Direction : char {
+	Left = 'L', Right = 'R', inPlace = 'P'
 };
 enum class Symbol : char /*
 						 One -- |
@@ -20,7 +20,7 @@ enum class Symbol : char /*
 						 Null -- E (nothing)
 						 */
 {
-	One = '1', Naught = '|', Null = 0
+	One = '|', Naught = 'o', Null = 0
 };
 
 struct Data {
@@ -54,7 +54,11 @@ protected:
 		dt._symb = static_cast<Symbol>(*dt._val);
 	}
 public:
-	Rule(Symbol s, State st, Direction to)
+	Rule(int st, char s, char to)
+		: Rule(static_cast<State>(st), static_cast<Symbol>(s), 
+			static_cast<Direction>(to)) {}
+
+	Rule(State st, Symbol s, Direction to)
 		: _to(to), _change(s), next(st) 
 	{ 
 #ifdef FuncStylePoly
