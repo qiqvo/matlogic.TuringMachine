@@ -2,9 +2,9 @@
 1111...10...0 or regex: "1+0*"
 It should always start with 1 and end on 1 or 0
 
-The only symbols machine knows are  One    -- 1
-						 			Lambda -- 0
-						 			Naught -- E (nothing)
+The only symbols machine knows are  	One    -- 1
+					Lambda -- 0
+		 			Naught -- E (nothing)
 
 Naught is used if you want explicitly specify that no matter of input, nothing should be done to it.
 so the following are equivelent:
@@ -12,8 +12,8 @@ q0 0 -> q1 0 L
 q0 0 -> q1 E L
 
 There are three directions you may specify 	Left = 'L'
-           									Right = 'R' 
-           									inPlace = 'P'
+           					Right = 'R' 
+           					inPlace = 'P'
            									
 inPlace is used if you want explicitly specify that the head shouldn't bother going anywhere.
 You may not write it, the following are equivelent:
