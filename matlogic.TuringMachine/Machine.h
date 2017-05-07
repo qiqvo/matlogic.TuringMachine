@@ -35,7 +35,9 @@ public:
 	}
 	char* GO() {
 		while (cur_state != -1) {
-			cur_state = (*rls.find({ cur_state, *(cur_data->_val) })).second(*cur_data);
+			cur_state = 
+				(*rls.find({ cur_state, *(cur_data->_val) }))
+				.second(*cur_data);
 		}
 		return input;
 	}
