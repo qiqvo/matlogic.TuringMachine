@@ -75,6 +75,10 @@ int main() {
 		Turing.Add_Rule(state_beg_num, init_sign,
 		{ state_end_num, end_sign, direct });
 	}
+
+	Turing.GetInput(&in_file);
+	cout << Turing.GO() << endl;
+
 	rules_file.close();
 	in_file.close();
 	return 0;
