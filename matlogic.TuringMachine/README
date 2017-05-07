@@ -1,0 +1,48 @@
+We assume Input data is always correct and consist with
+1111...10...0 or regex: "1+0*"
+It should always start with 1 and end on 1 or 0
+
+The only symbols machine knows are  One    -- 1
+						 			Lambda -- 0
+						 			Naught -- E (nothing)
+
+Naught is used if you want explicitly specify that no matter of input, nothing should be done to it.
+so the following are equivelent:
+q0 0 -> q1 0 L
+q0 0 -> q1 E L
+
+There are three directions you may specify 	Left = 'L'
+           									Right = 'R' 
+           									inPlace = 'P'
+           									
+inPlace is used if you want explicitly specify that the head shouldn't bother going anywhere.
+You may not write it, the following are equivelent:
+q1 1 -> q1 0 P
+q1 1 -> q1 0
+
+The states should be written in such a form:
+q1, q2, q5, ...  or q*
+where q* is a terminal state.
+
+Also mind this:
+if your algorithm tries to reach beyond the first of ones, the program crashes. 
+So either you can try another algo, or rewrite the code.
+
+main.cc:
+much part of it is used to parse rules.
+static_casts in main should be removed later on, because they ruin the encapsulation principle.
+
+Machine.h:
+instead of custom data type Rules is a map of 
+State and (Symbol which is curently on the head) <-> Rule 
+
+The maximum len of the tape, which machine uses is set to 100 (which is yet more then I've ever needed).
+
+Machine should be used in such a manner:
+1) Feed her with the rules one by one
+2) Feed her an input file
+3) Go
+
+RuleStateData.h:
+Functional style of Polymorthism is used here. 
+Otherwise code is not yet working.

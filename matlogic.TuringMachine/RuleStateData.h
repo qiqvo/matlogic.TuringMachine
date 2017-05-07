@@ -4,10 +4,13 @@
 #include <functional>
 using namespace std;
 
-#define FuncStylePoly
+#define FuncStylePoly // Functional style of Polymorthism
+                      // otherwise child classes needed and 
+                      // Rules would be a map of 
+                      // <pair{...} and Pointer to Rule>
 
 struct Data;  // ptr_char, symb under char
-class Rule;  // { func: direction, next_state, cur_state, change_of_ }
+class Rule;   
 using State = int; // q* == -1
 
 
@@ -20,7 +23,7 @@ enum class Symbol : char /*
 						 Naught -- E (nothing)
 						 */
 {
-	One = '1', Lambda = '0', Naught = 0
+	One = '1', Lambda = '0', Naught = 'E'
 };
 
 struct Data {
@@ -39,8 +42,10 @@ class Rule {
 protected:
 
 #ifdef FuncStylePoly
+	// moves the pointer
 	function<void(Data&)> placer;
-	function<void(Data&)> changer_prev;
+	// changes the val inside the pointer 
+	function<void(Data&)> changer_prev; 
 #else
 	virtual void placer(Data& dt) const = 0;
 #endif // FuncStylePoly

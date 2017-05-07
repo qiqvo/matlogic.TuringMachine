@@ -7,7 +7,7 @@
 #include <sstream>
 
 /*
-Rule is read in such order:
+Rule is read in such an order:
 q0 1 -> q1 0 R
 stands for:
 q0 -- init state
