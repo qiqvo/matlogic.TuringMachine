@@ -8,13 +8,13 @@
 
 /*
 Rule is read in such order:
-q0 | -> q1 o R
+q0 1 -> q1 0 R
 stands for:
 q0 -- init state
-|  -- sign 
+1  -- sign 
 -> 
 q1 -- end state
-o  -- change sign
+0  -- change sign
 R  -- move head in Right Direction
 */
 
@@ -38,12 +38,13 @@ int main() {
 	Machine Turing;
 	string tmp;
 	const char q = 'q';
+	const char terminal = '*';
 
 	int state_beg_num, state_end_num;
 	char init_sign, end_sign;
 	char direct;
-	while (rules_file) {
-		rules_file >> tmp;
+	
+	while (getline(rules_file, tmp)) {
 		auto tokens = split<queue<string>>(tmp, ' ');
 
 		if (tokens.front()[0] != q)
@@ -58,6 +59,8 @@ int main() {
 
 		if (tokens.front()[0] != q)
 			continue;
+		else if (tokens.front()[1] == terminal)
+			state_end_num = -1;
 		else
 			state_end_num = stoi(tokens.front().substr(1));
 		tokens.pop(); // - q1
@@ -72,7 +75,7 @@ int main() {
 			tokens.pop(); // - R
 		}
 		
-		Turing.Add_Rule(state_beg_num, init_sign,
+		Turing.Add_Rule(state_beg_num, static_cast<Symbol>(init_sign),
 		{ state_end_num, end_sign, direct });
 	}
 
@@ -81,5 +84,6 @@ int main() {
 
 	rules_file.close();
 	in_file.close();
+	cin >> direct;
 	return 0;
 }

@@ -16,11 +16,11 @@ enum class Direction : char {
 };
 enum class Symbol : char /*
 						 One -- |
-						 Naught -- lambda
-						 Null -- E (nothing)
+						 lambda
+						 Naught -- E (nothing)
 						 */
 {
-	One = '|', Naught = 'o', Null = 0
+	One = '1', Lambda = '0', Naught = 0
 };
 
 struct Data {
@@ -37,9 +37,6 @@ struct Data {
 
 class Rule {
 protected:
-	const Direction _to;
-	const Symbol _change;
-	const State next;
 
 #ifdef FuncStylePoly
 	function<void(Data&)> placer;
@@ -54,6 +51,10 @@ protected:
 		dt._symb = static_cast<Symbol>(*dt._val);
 	}
 public:
+	const State next;
+	const Symbol _change;
+	const Direction _to;
+
 	Rule(int st, char s, char to)
 		: Rule(static_cast<State>(st), static_cast<Symbol>(s), 
 			static_cast<Direction>(to)) {}
@@ -73,11 +74,11 @@ public:
 		else // if (_to == Direction::inPlace)
 			placer = [](Data& dt) -> void { return;	};
 
-		if (_change == Symbol::Null)
-			changer_prev = [](Data& dt) -> void { return;	};
+		if (_change == Symbol::Naught)
+			changer_prev = [](Data& dt) -> void { return; };
 		else 
-			changer_prev = [&](Data& dt) -> void { 
-				*dt._val = static_cast<char>(_change);
+			changer_prev = [s](Data& dt) -> void { 
+				*dt._val = static_cast<char>(s);
 			};
 #endif
 	}
