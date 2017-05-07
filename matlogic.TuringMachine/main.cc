@@ -1,8 +1,7 @@
-#include <iostream>
 #include "Machine.h"
+#include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
 #include <queue>
 #include <sstream>
 
