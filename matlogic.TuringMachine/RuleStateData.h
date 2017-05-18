@@ -1,7 +1,8 @@
 #pragma once
 #include <functional>
+#include <iostream>
 using namespace std;
-
+// #define Debug
 #define FuncStylePoly // Functional style of Polymorthism
                       // otherwise child classes needed and 
                       // Rules would be a map of 
@@ -21,7 +22,7 @@ enum class Symbol : char /*
 						 Naught -- E (nothing)
 						 */
 {
-	One = '1', Lambda = '0', Naught = 'E'
+	One = '1', Lambda = '0', Naught = 'E', Pass = '#', A = 'a'
 };
 
 struct Data {
@@ -49,6 +50,12 @@ protected:
 #endif // FuncStylePoly
 
 	void change(Data& dt) const {
+#ifdef Debug
+		std::cout << " to state " << next << " change "
+			<< static_cast<char>(dt._symb) << " to " << static_cast<char>(_change) << '\n';
+		std::cout << "Move to " << static_cast<char>(_to) << '\n';
+#endif // Debug
+
 		changer_prev(dt);
 		placer(dt);
 		dt._symb = static_cast<Symbol>(*dt._val);
