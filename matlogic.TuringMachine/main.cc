@@ -20,24 +20,16 @@ R  -- move head in Right Direction
 int main() {
 	// std::ios::sync_with_stdio(false);
 	ifstream in_file("Input");
-	ofstream out_file1("Output.MacOld");
-	ofstream out_file2("Output.MacNew");
+	ofstream out_file("Output");
+	
+	Machine Test;
+	Test.SetRules("RULES");
+	Test.GetInput(&in_file);
 
-	Machine Test_old, Test_new;
-	Test_old.SetRules("RULES.standartMult");
-	Test_new.SetRules("RULES.NewMult");
-
-	Test_old.GetInput(&in_file);
-	in_file.clear();
-	in_file.seekg(0, in_file.beg);
-	Test_new.GetInput(&in_file);
-
-	Test_old.GO(&out_file1);
-	Test_new.GO(&out_file2);
+	Test.GO(&out_file);
 
 	in_file.close();
-	out_file1.close();
-	out_file2.close();
+	out_file.close();
 	
 	int tmp;
 	cin >> tmp;
