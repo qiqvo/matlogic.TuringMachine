@@ -115,6 +115,7 @@
     <ClInclude Include="RuleStateData.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Machine.cc" />
     <ClCompile Include="main.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
